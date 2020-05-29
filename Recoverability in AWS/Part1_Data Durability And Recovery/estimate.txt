@@ -1,0 +1,11 @@
+Minimum RTO for a single AZ outage
+AWS RDS manages recovery automatically as quickly as possible without administrative intervention in multi AZ deployments. Therefore, RPO for single AZ outage would be within one or two minutes. 
+
+Minimum RTO for a single region outage
+For protection against single region outage, read replica in cross region is used. This is not automatically managed by AWS. Administrative staff needs to be informed about the outage and manually promote the readreplica to be primary. Other changes on web application side may be needed as well. Therefore, RTO in this case can be 2-5 hours. 
+
+Minimum RPO for a single AZ outage
+Replication used by Multi AZ deployment is synchronous. That means databases updates are written concurrently in primary and standby. This protects the latest database updates. There for RPO for single AZ outage will be less than a minute. 
+
+Minimum RPO for a single region outage
+Updates to source DB instance will automatically replicated to read replica asynchronously. But it can fall behind for reasons like I/O volume, network latency, strengths and weakness of supported database engine's native replication etc. Therefore, RPO in single region outage can be of about 1-2 hours.

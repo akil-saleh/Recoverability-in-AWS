@@ -1,0 +1,52 @@
+
+[ec2-user@ip-10-1-10-116 ~]$ mysql -h primary.c4dbcayubhac.us-east-2.rds.amazonaws.com -P 3306 -u admin -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 37
+Server version: 8.0.17 Source distribution
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create table employee(
+    ->    emp_id INT NOT NULL AUTO_INCREMENT,
+    ->    emp_name VARCHAR(100) NOT NULL,
+    ->    salary INT NOT NULL,
+    ->    PRIMARY KEY ( emp_id )
+    -> );
+ERROR 1046 (3D000): No database selected
+mysql> create database udacity
+    -> ;
+Query OK, 1 row affected (0.02 sec)
+mysql> use udacity
+Database changed
+mysql> create table employee(
+    ->    emp_id INT NOT NULL AUTO_INCREMENT,
+    ->    emp_name VARCHAR(100) NOT NULL,
+    ->    salary INT NOT NULL,
+    ->    PRIMARY KEY ( emp_id )
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> select * from employee;
+Empty set (0.00 sec)
+
+mysql> insert into employee (emp_name, salary) values(Brian, 10000);
+ERROR 1054 (42S22): Unknown column 'Brian' in 'field list'
+mysql> insert into employee (emp_name, salary) values('Brian', 10000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from employee;
++--------+----------+--------+
+| emp_id | emp_name | salary |
++--------+----------+--------+
+|      1 | Brian    |  10000 |
++--------+----------+--------+
+1 row in set (0.00 sec)
+
+mysql>
